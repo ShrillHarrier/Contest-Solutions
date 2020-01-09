@@ -1,0 +1,63 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int rounds = sc.nextInt();
+		
+		char[] sym = new char[rounds];
+		int[] friend = new int[rounds];
+		
+		HashMap<Integer, Integer> time = new HashMap<Integer, Integer>();
+		
+		for(int i = 0; i < rounds; i++) {
+			sym[i] = sc.next().charAt(0);
+			friend[i] = sc.nextInt();
+		}
+		
+		int current;
+		
+		for(int i = 0; i < rounds; i++) {
+			
+		if(sym[i] == 'R' && (time.containsKey(friend[i]) == false)) {
+			
+			current = friend[i];
+			int count = 0;
+			boolean ends = false;
+					
+			for(int j = i+1; j < rounds; j++) {
+				if(sym[j] == 'W') {
+					count += friend[j];
+				}
+				else {
+					count++;
+					System.out.println("count: " + count);
+				}
+				
+				if(sym[j] == 'S' && friend[j] == current) {
+					ends = true;
+				}
+				else if(sym[j] == 'R' && friend[j] == current){
+					ends = false;
+				}
+			}
+			
+			if(ends == true) {
+				time.put(current, count);
+			}
+			else {
+				time.put(current, -1);
+			}
+			
+			System.out.println(current + " " + time.get(current));
+			
+		}
+		
+		}
+
+	}
+
+}

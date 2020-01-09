@@ -1,0 +1,36 @@
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String numeral = sc.nextLine();
+		
+		HashMap<String, Integer> h = new HashMap<String, Integer>();
+		
+	    h.put("I", 1);
+	    h.put("V", 5);
+	    h.put("X", 10);
+	    h.put("L", 50);
+	    h.put("C", 100);
+	    h.put("D", 500);
+	    h.put("M", 1000);
+	    
+	    int num = 0;
+				
+		for(int i = 0; i < numeral.length(); i+=2) {
+			
+			
+			
+			num += ((int)numeral.charAt(i)-48) * h.get(Character.toString(numeral.charAt(i+1)));
+			
+		}
+		
+		System.out.println(num);
+
+	}
+
+}

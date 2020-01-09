@@ -1,0 +1,75 @@
+import java.util.Arrays; 
+import java.util.HashMap; 
+import java.util.Scanner;
+
+public class Main { 
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int rounds = sc.nextInt();
+		
+		char[] sym = new char[rounds];
+		int[] friend = new int[rounds];
+		
+		HashMap<Integer, Integer> time = new HashMap<Integer, Integer>();
+		
+		for(int i = 0; i < rounds; i++) {
+			sym[i] = sc.next().charAt(0);
+			friend[i] = sc.nextInt();
+			if(sym[i] == 'R') {
+				time.put(friend[i], 0);
+			}
+		}
+		
+		int current;
+		
+		for(int i = 0; i < rounds; i++) {
+			
+		//Simplify this loop to check certain friends more than once and add to hashmap
+		if(sym[i] == 'R' /*&& (time.containsKey(friend[i]) == false)*/) {
+			
+			current = friend[i];
+			int count = 1;
+			boolean ends = false;
+					
+			for(int j = i+1; j < rounds; j++) {
+				if(sym[j] == 'S' && friend[j] == current) {
+					ends = true;
+					break;
+				}
+				else if(sym[j] == 'W') {
+					count += friend[j]-1;
+				}
+				else {
+					count++;
+				}
+				
+				//System.out.println("count " + current + ": " + count);
+				
+			}
+			
+			if(ends == true) {
+				time.put(current, time.get(current) + count);
+				}
+			else {
+				time.put(current, -1);
+			}
+			
+		}
+			
+		}
+		
+		 Object[] ppl = time.keySet().toArray();
+		 
+		 Arrays.sort(ppl);
+		 
+		 for(int i = 0; i < ppl.length; i++) {
+			 System.out.println(ppl[i] + " " + time.get(ppl[i]));
+		 }
+		
+		}
+
+	}
+
+

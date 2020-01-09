@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class Main {
+	
+	static int[][] floor;
+	static int x;
+	static int y;
+	
+	 public static void dfs(int i, int j, int k) {
+		if (i >= 0 && i < y && j >= 0 && j < x && floor[i][j] == 0)
+		{
+		    floor[i][j] = k;
+		    dfs(i - 1, j, k);
+		    dfs(i + 1, j, k);
+		    dfs(i, j + 1, k);
+		    dfs(i, j - 1, k);
+		}
+		}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int wood = sc.nextInt();
+		int y = sc.nextInt();
+		int x = sc.nextInt();
+		
+		int[][] floor = new int[y][x];
+		
+		for(int i = 0; i < y; i++) {
+				
+			String line = sc.next();
+			
+			//System.out.println(line);
+			
+			for(int j = 0; j < x; j++) {
+				if(line.charAt(j) == 'I') {
+					floor[i][j] = -1;
+				}
+				else {
+					floor[i][j] = 0;
+				}
+				//System.out.print(floor[i][j]);
+			}
+			//System.out.println("");
+		}
+		
+		for(int i = 0; i < y; i++) {
+			for(int j = 0; j < x; j++) {
+				System.out.print(floor[i][j]);
+				}
+			System.out.println("");
+			}
+		
+		int rooms = 0;
+		
+		for(int i = 0; i < y; i++) {
+			for(int j = 0; j < x; j++) {
+				if(floor[i][j] == 0) {
+					rooms++;
+					//System.out.println(x + " " + y + " " + i + " " + j + " " + rooms);
+					dfs(i, j, rooms);
+				}
+			}
+		}
+		
+		for(int i = 0; i < y; i++) {
+			for(int j = 0; j < x; j++) {
+				System.out.print(floor[i][j]);
+				}
+			System.out.println("");
+			}
+		}
+}

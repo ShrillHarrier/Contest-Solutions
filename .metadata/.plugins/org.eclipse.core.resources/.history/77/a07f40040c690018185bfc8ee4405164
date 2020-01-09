@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+	
+	public static String toNum(char letter) {
+		int number = (int)letter;
+		//System.out.println(number);
+		number -= 64;
+		number /= 3;
+		number = (int)number;
+		//System.out.println(number);
+		return Integer.toString(number);
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int rounds = sc.nextInt();
+		String[] numbers = new String[rounds+1];
+		
+		for(int i = 0; i<rounds+1; i++) {
+			String number = sc.nextLine();
+			String newnumber = "";
+			for(int j = 0; j<number.length(); j++) {
+				if(number.charAt(j) != '-') {
+				if((int)number.charAt(j) >= 65 && (int)number.charAt(j) <= 89) {
+					newnumber += toNum(number.charAt(j));
+				}
+				else {
+					newnumber += number.charAt(j);
+				}
+			}
+			}	
+			numbers[i]=newnumber;
+		}
+		
+		for(int i = 0; i<rounds; i++) {
+			System.out.println(numbers[i]);
+		}
+
+	}
+
+}

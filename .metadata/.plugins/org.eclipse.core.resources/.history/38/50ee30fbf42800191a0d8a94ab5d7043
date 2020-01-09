@@ -1,0 +1,50 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int poems = sc.nextInt();
+		
+		String[][] lines = new String[poems][4];
+		
+		char[] vowels = {'a', 'e', 'i', 'o', 'u'};
+		
+		for(int i = 0; i < poems; i++) {
+			
+			for(int j = 0; j < 4; j++) {
+				
+				lines[i][j] = sc.nextLine();
+				
+			}
+		}
+		
+		for(int i = 0; i < poems; i++) {
+			
+			String[] endings = new String[4];
+			
+			for(int j = 0; j < 4; j++) {
+				
+				boolean firstv = false;
+				boolean lastv = false;
+				
+				for(int k = lines[i][j].length()-1; k > -1; k--) {
+					
+					if(Arrays.asList(vowels).contains(lines[i][j].charAt(k))) {
+						firstv = true;
+					}
+					
+				}
+				
+				
+				
+			}
+			
+		}
+
+	}
+
+}

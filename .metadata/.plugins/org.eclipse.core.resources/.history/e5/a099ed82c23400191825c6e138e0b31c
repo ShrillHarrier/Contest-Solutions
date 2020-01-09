@@ -1,0 +1,137 @@
+import java.util.Scanner;
+
+public class Main {
+	
+	static int rows;
+	static int cols;
+	static String[][] grid;
+	static int turn;
+	static int bestcounts[];
+	
+	public static void dps(boolean[][] visited, int count, int x, int y) {
+		
+		System.out.println(x + " " + y);
+		System.out.println(grid[(int)x][(int)y]);
+		
+		visited[x][y] = true;
+		count++;
+		
+		if(grid[x][y].equals("+")){
+			if(x > 0 && visited[x-1][y] == false) {
+			dps(visited, count, x-1, y);
+			}
+			if(x < rows-1 && visited[x+1][y] == false) {
+			dps(visited, count, x+1, y);
+			}
+			if(y > 0 && visited[x][y-1] == false) {
+			dps(visited, count, x, y-1);
+			}
+			if(y < cols-1 && visited[x][y+1] == false) {
+			dps(visited, count, x, y+1);
+			}
+		}
+		
+		if(grid[x][y].equals("-")){
+			if(y > 0 && visited[x][y-1] == false) {
+				dps(visited, count, x, y-1);
+				}
+			if(y < cols-1 && visited[x][y+1] == false) {
+				dps(visited, count, x, y+1);
+				}
+		}
+		
+		if(grid[x][y].equals("|")){
+			if(x > 0 && visited[x-1][y] == false) {
+				dps(visited, count, x-1, y);
+			}
+			if(x < rows-1 && visited[x+1][y] == false) {
+				dps(visited, count, x+1, y);
+			}
+		}
+		
+		if(x == rows-1 && y == cols-1 && (grid[x][y].equals("*") == false)) {
+			System.out.println(count);
+			if(bestcounts[turn] > -1) {
+				if(bestcounts[turn] > count) {
+					bestcounts[turn] = count;
+				}
+			}
+			else {
+				bestcounts[turn] = count;
+			}
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int rounds = sc.nextInt();
+		
+		bestcounts = new int[rounds];
+		
+		for(int i = 0; i < rounds; i++) {
+			bestcounts[i] = -1;
+		}
+		
+		for(int i = 0; i < rounds; i++) {
+			turn = i;
+			
+			rows = sc.nextInt();
+			cols = sc.nextInt();
+			
+			grid = new String[rows][cols];
+			boolean[][] visited = new boolean[rows][cols];
+			
+			for(int j = 0; j < rows; j++) {
+				String row = sc.next();
+				
+				for(int k = 0; k < cols; k++) {
+					grid[j][k] = row.charAt(k)+"";
+					
+				}
+				
+			}
+			
+			int count = 0;
+			
+			dps(visited, count, 0, 0);
+			
+		}
+		
+		for(int i = 0; i < rounds; i++) {
+			System.out.println(bestcounts[i]);
+		}
+		
+		/*public static void dps(boolean[][] visited, int count, int x, int y) {
+			
+			visited[x][y] = true;
+			
+			if(x > 0 && (grid[x-1][y].equals("+") || grid[x-1][y].equals("-")) && visited[x-1][y] == false){
+				dps(visited, count, x-1, y);
+			}
+			
+			if(x < rows-1 && (grid[x+1][y].equals("+") || grid[x+1][y].equals("-")) && visited[x+1][y] == false){
+				dps(visited, count, x+1, y);
+			}
+			
+			if(y > 0 && (grid[x][y-1].equals("+") || grid[x][y-1].equals("|")) && visited[x][y-1] == false){
+				dps(visited, count, x, y-1);
+			}
+			
+			if(y < cols-1 && (grid[x][y+1].equals("+") || grid[x][y+1].equals("|")) && visited[x][y+1] == false){
+				dps(visited, count, x, y+1);
+			}
+			
+			count++;
+			//System.out.println(count);
+			
+			if(x == cols-1 && y == rows-1) {
+				System.out.println(count+1);
+			}
+			
+		}*/
+
+	}
+
+}

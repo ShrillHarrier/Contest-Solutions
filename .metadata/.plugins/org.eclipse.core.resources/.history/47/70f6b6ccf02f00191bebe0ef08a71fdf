@@ -1,0 +1,35 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int reads = sc.nextInt();
+		
+		HashMap<Integer, Integer> freq = new HashMap<Integer, Integer>();
+		
+		for(int i = 0; i < reads; i++) {
+			
+			int temp = sc.nextInt();
+			
+			if(freq.containsKey(i) == false) {
+			freq.put(temp, 1);
+			}
+			else {
+				freq.put(temp, freq.get(i) + 1);
+			}
+		}
+		
+		Object[] values = freq.values().toArray();
+		
+		Arrays.sort(values);
+		
+		System.out.println(freq);
+
+	}
+
+}

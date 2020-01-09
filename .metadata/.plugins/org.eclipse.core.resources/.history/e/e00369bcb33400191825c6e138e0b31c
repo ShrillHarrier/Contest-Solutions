@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class Main {
+	
+	static int rows;
+	static int cols;
+	static String[][] grid;
+	static boolean[][] visited;
+	
+	public static void dps(int count, int x, int y) {
+		
+		visited[x][y] = true;
+		
+		if(x > 0 && (grid[x-1][y].equals("+") || grid[x-1][y].equals("-")) && visited[x-1][y] == false){
+			dps(count, x-1, y);
+		}
+		
+		if(x < cols-1 && (grid[x+1][y].equals("+") || grid[x+1][y].equals("-")) && visited[x+1][y] == false){
+			dps(count, x+1, y);
+		}
+		
+		if(y > 0 && (grid[x][y-1].equals("+") || grid[x][y-1].equals("|")) && visited[x][y-1] == false){
+			dps(count, x, y-1);
+		}
+		
+		if(y < rows-1 && (grid[x][y+1].equals("+") || grid[x][y+1].equals("|")) && visited[x][y+1] == false){
+			dps(count, x, y+1);
+		}
+		
+		count++;
+		
+		if(grid[x][y].equals("*") || (x == cols-1 && y == rows-1)) {
+			System.out.println(count+1);
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int rounds = sc.nextInt();
+		
+		for(int i = 0; i < rounds; i++) {
+			
+			rows = sc.nextInt();
+			cols = sc.nextInt();
+			
+			grid = new String[rows][cols];
+			visited = new boolean[rows][cols];
+			
+			for(int j = 0; j < rows; j++) {
+				String row = sc.next();
+				
+				for(int k = 0; k < cols; k++) {
+					grid[j][k] = row.charAt(k)+"";
+				}
+			}
+			
+			int count = 1;
+			
+			dps(count, 0, 0);
+			
+		}
+
+	}
+
+}

@@ -1,0 +1,78 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int poems = sc.nextInt();
+		
+		String[][] lines = new String[poems][4];
+		
+		String vowels = "aeiou";
+		
+		for(int i = 0; i < poems; i++) {
+			
+			for(int j = 0; j < 4; j++) {
+				
+				lines[i][j] = sc.nextLine();
+				
+			}
+		}
+		
+		for(int i = 0; i < poems; i++) {
+			
+			String[] endings = {"","","",""};
+			
+			for(int j = 0; j < 4; j++) {
+				
+				boolean firstv = false;
+				boolean lastv = false;
+				
+				for(int k = lines[i][j].length()-2; k > -1; k--) {
+					
+					if(vowels.contains(lines[i][j].charAt(k-1)+"")) {
+						firstv = true;
+					}
+					
+					if((vowels.contains(lines[i][j].charAt(k-1)+"") == false  || vowels.charAt(k-1) == ' ') && firstv == true) {
+						lastv = true;
+					}
+					
+					endings[j] += lines[i][j].charAt(k);
+					
+					System.out.println(endings[j]);
+					System.out.println(firstv);
+					System.out.println(lastv);
+					
+					if(firstv == true && lastv == true) {
+						break;
+					}
+					
+				}
+				
+			}
+			
+			if(endings[0].equals(endings[1]) && endings[1].equals(endings[2]) && endings[2].equals(endings[3])) {
+				System.out.println("perfect");
+			}
+			else if(endings[0].equals(endings[1]) && endings[2].equals(endings[3])) {
+				System.out.println("even");
+			}
+			else if(endings[0].equals(endings[2]) && endings[1].equals(endings[3])) {
+				System.out.println("cross");
+			}
+			else if(endings[0].equals(endings[3]) && endings[1].equals(endings[2])) {
+				System.out.println("shell");
+			}
+			else {
+				System.out.println("free");
+			}
+			
+		}
+
+	}
+
+}

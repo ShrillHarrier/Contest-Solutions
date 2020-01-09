@@ -1,0 +1,45 @@
+import java.util.Scanner; 
+
+public class Main {
+	
+	public static String reverse(String input) {
+	    char[] in = input.toCharArray();
+	    int begin=0;
+	    int end=in.length-1;
+	    char temp;
+	    while(end>begin){
+	        temp = in[begin];
+	        in[begin]=in[end];
+	        in[end] = temp;
+	        end--;
+	        begin++;
+	    }
+	    return new String(in);
+	}
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int min = sc.nextInt();
+		int max = sc.nextInt();
+		
+		int half = (min + max)/2;
+		
+		for(int i = 0; i < max; i++) {
+			String testmin = Integer.toString(half+i);
+			String testmax = Integer.toString(half-i);
+			
+			if(testmin.equals(reverse(testmin))) {
+				half += i;
+				break;
+			}
+			else if(testmax.equals(reverse(testmax))) {
+				half -= i;
+				break;
+			}
+		}
+		
+		System.out.println(half);
+
+	}
+}

@@ -1,0 +1,10 @@
+Graph Theory (DFS): 
+Loop through function
+Use conditions in function
+Use recursion in function
+Use if (r >= 0 && r < row && c >= 0 && c < col) when grid to prevent index out of range
+
+Other:
+.split("+") might need to be .split("//+")
+find rotating 2D array in S2 2018
+nextLine() does not work like next()
